@@ -1,13 +1,78 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+package application;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+import java.util.Locale;
+import java.util.Scanner;
+
+//Console Calc
+//Calculadora simples de console criada para praticar
+//estruturas de repetição, decisão e operações básicas em Java.
+
+public class Main {
+    public static void main(String[] args) {
+
+        Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
+        int opcao;
+
+        //Loop principal do programa
+        //O menu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
+        do {
+            System.out.println("-------- CONSOLE CALC --------");
+            System.out.println("1 - Somar");
+            System.out.println("2 - Subtrair");
+            System.out.println("3 - Multiplicar");
+            System.out.println("4 - Dividir");
+            System.out.println("0 - Sair");
+            System.out.println();
+            System.out.println("Escolha uma opção: ");
+            opcao = sc.nextInt();
+            if (opcao < 0 || opcao > 4) {
+                System.out.println("Opção inválida");
+                System.out.println("------------------------------");
+                continue;
+            }
+
+            if (opcao != 0) {
+                System.out.println("Digite o primeiro número: ");
+                double n1 = sc.nextDouble();
+                System.out.println("Digite o segundo número: ");
+                double n2 = sc.nextDouble();
+
+//Executa a operação matemática conforme a opção escolhida no menu
+                switch (opcao) {
+                    case 1:
+                        double soma = n1 + n2;
+                        System.out.println("Soma: " + soma);
+                        break;
+                    case 2:
+                        double subtracao = n1 - n2;
+                        System.out.println("Subtração: " + subtracao);
+                        break;
+                    case 3:
+                        double multiplicacao = n1 * n2;
+                        System.out.println("Multiplicação: " + multiplicacao);
+                        break;
+                    case 4:
+                        if (n2 == 0) {
+                            System.out.println("Divisão por zero impossível");
+                        } else {
+                            double dividir = n1 / n2;
+                            System.out.println("Divisão: " + dividir);
+                        }
+                        break;
+                    default:
+                        System.out.println("Opção invalida");
+                        break;
+                }
+                System.out.println();
+                System.out.println("------------------------------");
+                System.out.println();
+            } else {
+                System.out.println("Encerrando o programa...");
+            }
+        } while (opcao != 0);
+
+        //Finaliza o uso do Scanner e encerra o programa
+        sc.close();
     }
 }
