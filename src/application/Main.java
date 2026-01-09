@@ -1,5 +1,6 @@
 package application;
 
+import entities.Divisao;
 import entities.Multiplicar;
 import entities.Somar;
 import entities.Subtrair;
@@ -42,6 +43,7 @@ public class Main {
                 System.out.println("Digite o segundo número: ");
                 double n2 = sc.nextDouble();
 
+                Divisao divisao = new Divisao();
                 Multiplicar multiplicar = new Multiplicar();
                 Subtrair subtrair = new Subtrair();
                 Somar somar = new Somar();
@@ -63,7 +65,7 @@ public class Main {
                         if (n2 == 0) {
                             System.out.println("Divisão por zero impossível");
                         } else {
-                            double dividir = n1 / n2;
+                            double dividir = divisao.calcular(n1, n2);
                             System.out.println("Divisão: " + dividir);
                         }
                         break;
