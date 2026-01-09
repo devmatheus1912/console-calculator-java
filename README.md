@@ -1,53 +1,64 @@
-# Console Calc - Java
+# 🧮 Console Calculator – Java
 
-Este é o meu projeto inicial para estudo de Java. Estou focado em transformar uma lógica simples de calculadora em um código organizado, aplicando os primeiros conceitos de **Programação Orientada a Objetos (POO)**.
+🇧🇷 **Português** | 🇺🇸 **English below**
 
----
+Projeto de **calculadora em console**, desenvolvido em **Java 25 LTS**, com foco no **aprendizado dos fundamentos da linguagem**, separação de responsabilidades com classes e boas práticas iniciais de **Git e GitHub**.
 
-## 🚀 O QUE EU JÁ IMPLEMENTEI
-
-* **Estrutura de Pacotes:** Separei o projeto em `application` (entrada de dados) e `entities` (lógica de negócio).
-* **Classes de Operação:** A soma e a subtração já possuem classes próprias, saindo da Main.
-* **Loop de Menu:** O programa continua rodando até que o usuário decida sair (opção 0).
-* **Formatação:** Uso de `Locale.US` para garantir o padrão decimal internacional.
-
-## 🛠️ PRÓXIMOS DESAFIOS
-
-- [ ] Criar as classes de Multiplicação e Divisão no pacote entities.
-- [ ] Adicionar proteção para o sistema não fechar se o usuário digitar uma letra.
-- [ ] Melhorar a validação de divisão por zero.
-
-## 💻 COMO EXECUTAR
-
-1. Clone este repositório.
-2. Abra o projeto no IntelliJ IDEA.
-3. Execute o arquivo `Main.java` localizado no pacote `application`.
+Este projeto está sendo desenvolvido de forma incremental, acompanhando minha evolução nos estudos em Java.
 
 ---
 
-# English Version
+## 🎯 Objetivo do Projeto
 
-This is my initial project for Java studies. I am focused on turning simple calculator logic into organized code, applying the first concepts of **Object-Oriented Programming (OOP)**.
-
-## 🚀 WHAT I HAVE IMPLEMENTED
-
-* **Package Structure:** I separated the project into `application` (UI/input) and `entities` (business logic).
-* **Operation Classes:** Addition and subtraction now have their own classes, moving logic away from Main.
-* **Menu Loop:** The program keeps running until the user chooses to exit (option 0).
-* **Formatting:** Using `Locale.US` for international decimal standards.
-
-## 🛠️ NEXT CHALLENGES
-
-- [ ] Create Multiplication and Division classes in the entities package.
-- [ ] Handle input errors (e.g., preventing the app from crashing when a letter is typed).
-- [ ] Refine the division by zero validation.
-
-## 💻 HOW TO RUN
-
-1. Clone this repository.
-2. Open it in IntelliJ IDEA.
-3. Run the `Main.java` file located in the `application` package.
+- Praticar lógica de programação
+- Aprender a criar e organizar classes em Java
+- Separar a responsabilidade do `Main` das operações matemáticas
+- Aplicar conceitos básicos de orientação a objetos
+- Praticar versionamento com Git
+- Criar um projeto simples para portfólio inicial
 
 ---
 
-**Autor / Author:** Matheus - [devmatheus1912](https://github.com/devmatheus1912)
+## ⚙️ Funcionalidades Atuais
+
+- Menu interativo no console
+- Operações implementadas:
+  - ➕ Adição
+  - ➖ Subtração
+- Leitura de valores informados pelo usuário
+- Operações separadas em classes específicas
+
+---
+
+## 🗂️ Estrutura do Projeto
+
+src/
+├── application/
+│ └── Main.java
+└── entities/
+├── Somar.java
+└── Subtrair.java
+
+### 📌 Organização
+
+- `Main.java`: controla a execução do programa e a interação com o usuário
+- `entities`: contém as classes responsáveis pelas operações matemáticas
+
+---
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+- **Java 25 LTS**
+- IDE de sua preferência (IntelliJ IDEA, Eclipse, VS Code)
+
+### Passos
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/devmatheus1912/console-calculator-java.git
+```
+## 📌 Status do Projeto
+
+🚧 Em desenvolvimento — projeto de estudo
