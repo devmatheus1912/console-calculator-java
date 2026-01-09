@@ -1,5 +1,6 @@
 package application;
 
+import entities.Multiplicar;
 import entities.Somar;
 import entities.Subtrair;
 
@@ -41,6 +42,7 @@ public class Main {
                 System.out.println("Digite o segundo número: ");
                 double n2 = sc.nextDouble();
 
+                Multiplicar multiplicar = new Multiplicar();
                 Subtrair subtrair = new Subtrair();
                 Somar somar = new Somar();
 //Executa a operação matemática conforme a opção escolhida no menu
@@ -54,7 +56,7 @@ public class Main {
                         System.out.println("Subtração: " + subtracao);
                         break;
                     case 3:
-                        double multiplicacao = n1 * n2;
+                        double multiplicacao = multiplicar.calcular(n1, n2);
                         System.out.println("Multiplicação: " + multiplicacao);
                         break;
                     case 4:
