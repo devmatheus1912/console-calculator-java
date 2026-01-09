@@ -1,5 +1,7 @@
 package application;
 
+import entities.Somar;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -38,10 +40,11 @@ public class Main {
                 System.out.println("Digite o segundo número: ");
                 double n2 = sc.nextDouble();
 
+                Somar somar = new Somar();
 //Executa a operação matemática conforme a opção escolhida no menu
                 switch (opcao) {
                     case 1:
-                        double soma = n1 + n2;
+                        double soma = somar.calcular(n1, n2);
                         System.out.println("Soma: " + soma);
                         break;
                     case 2:
