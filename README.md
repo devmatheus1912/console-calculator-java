@@ -25,8 +25,24 @@ O foco está no aprendizado dos fundamentos da programação, organização do c
 ## Status do Projeto
 
 🚧 Em desenvolvimento
-  
+
+## Estrutura do projeto
+
+- `src/application/Main.java`: controla o fluxo principal.
+- `src/entities`: contém classes de operações matemáticas como `Somar`.
+
+Próximos passos: implementar classes separadas para Subtrair, Multiplicar e Dividir.
+
+
+## Como rodar
+
+1. Clone este repositório.
+2. Abra no IntelliJ IDEA.
+3. Compile e execute a classe `Main`.
+4. Escolha opções no menu.
+
 ---
+
 ## English Version
 
 # Console Calculator in Java
