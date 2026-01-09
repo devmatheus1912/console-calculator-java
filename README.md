@@ -1,48 +1,45 @@
 # 🧮 Console Calculator – Java
 
-🇧🇷 **Português** | 🇺🇸 **English below**
+🇧🇷 **Português** |
 
-Projeto de **calculadora em console**, desenvolvido em **Java 25 LTS**, com foco no **aprendizado dos fundamentos da linguagem**, separação de responsabilidades com classes e boas práticas iniciais de **Git e GitHub**.
-
-Este projeto está sendo desenvolvido de forma incremental, acompanhando minha evolução nos estudos em Java.
+Projeto de **calculadora em console**, desenvolvido em **Java 25 LTS**, com o objetivo de praticar lógica de programação, organização de código com classes e boas práticas de desenvolvimento com **Git e GitHub**. :contentReference[oaicite:1]{index=1}
 
 ---
 
-## 🎯 Objetivo do Projeto
+## 🎯 Objetivo
 
-- Praticar lógica de programação
-- Aprender a criar e organizar classes em Java
-- Separar a responsabilidade do `Main` das operações matemáticas
-- Aplicar conceitos básicos de orientação a objetos
-- Praticar versionamento com Git
-- Criar um projeto simples para portfólio inicial
+Este projeto foi criado para fins de estudo. O foco principal é:
+
+- Aprender lógica de programação
+- Criar e organizar classes em Java
+- Separar responsabilidades entre classes
+- Praticar versionamento com Git e GitHub
+- Criar um projeto simples para portfólio
 
 ---
 
-## ⚙️ Funcionalidades Atuais
+## ⚙️ Funcionalidades
 
 - Menu interativo no console
 - Operações implementadas:
   - ➕ Adição
   - ➖ Subtração
+  - ✖️ Multiplicação
+  - ➗ Divisão
 - Leitura de valores informados pelo usuário
-- Operações separadas em classes específicas
+- Estrutura de classes separadas para cada operação
 
 ---
 
 ## 🗂️ Estrutura do Projeto
-
 src/
 ├── application/
 │ └── Main.java
 └── entities/
 ├── Somar.java
-└── Subtrair.java
-
-### 📌 Organização
-
-- `Main.java`: controla a execução do programa e a interação com o usuário
-- `entities`: contém as classes responsáveis pelas operações matemáticas
+├── Subtrair.java
+├── Multiplicar.java
+└── Dividir.java
 
 ---
 
@@ -56,9 +53,5 @@ src/
 ### Passos
 
 1. Clone o repositório:
-```bash
-git clone https://github.com/devmatheus1912/console-calculator-java.git
-```
-## 📌 Status do Projeto
-
-🚧 Em desenvolvimento — projeto de estudo
+   ```bash
+   git clone https://github.com/devmatheus1912/console-calculator-java.git
