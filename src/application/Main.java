@@ -19,18 +19,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcao;
 
+        Menu menu = new Menu();
+        Divisao divisao = new Divisao();
+        Multiplicar multiplicar = new Multiplicar();
+        Subtrair subtrair = new Subtrair();
+        Somar somar = new Somar();
+
         //Loop principal do programa
-        //O menu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
         do {
-            System.out.println("-------- CONSOLE CALC --------");
-            System.out.println("1 - Somar");
-            System.out.println("2 - Subtrair");
-            System.out.println("3 - Multiplicar");
-            System.out.println("4 - Dividir");
-            System.out.println("0 - Sair");
-            System.out.println();
-            System.out.println("Escolha uma opção: ");
-            opcao = sc.nextInt();
+            opcao = menu.menu(sc);
+
+            //O menu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
             if (opcao < 0 || opcao > 4) {
                 System.out.println("Opção inválida");
                 System.out.println("------------------------------");
@@ -43,11 +42,7 @@ public class Main {
                 System.out.println("Digite o segundo número: ");
                 double n2 = sc.nextDouble();
 
-                Divisao divisao = new Divisao();
-                Multiplicar multiplicar = new Multiplicar();
-                Subtrair subtrair = new Subtrair();
-                Somar somar = new Somar();
-//Executa a operação matemática conforme a opção escolhida no menu
+                //Executa a operação matemática conforme a opção escolhida no menu
                 switch (opcao) {
                     case 1:
                         double soma = somar.calcular(n1, n2);
