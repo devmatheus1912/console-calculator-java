@@ -28,14 +28,6 @@ public class Main {
         //Loop principal do programa
         do {
             opcao = menu.menu(sc);
-
-            //O menu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
-            if (opcao < 0 || opcao > 4) {
-                System.out.println("Opção inválida");
-                System.out.println("------------------------------");
-                continue;
-            }
-
             if (opcao != 0) {
                 System.out.println("Digite o primeiro número: ");
                 double n1 = sc.nextDouble();
