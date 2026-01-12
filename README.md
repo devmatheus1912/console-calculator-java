@@ -10,14 +10,15 @@ Este projeto faz parte da minha evolução como iniciante em Java e será aprimo
 
 ## 🎯 Objetivo
 
-Este projeto foi criado para fins educacionais, com os seguintes objetivos:
+Este projeto foi criado para fins de estudo e evolução prática em Java.  
+O foco principal é:
 
-- Praticar lógica de programação em Java
-- Aprender a criar e organizar classes
-- Separar responsabilidades entre as classes
-- Utilizar estruturas de decisão e repetição
+- Aprender lógica de programação
+- Trabalhar com estruturas de repetição e decisão
+- Aplicar separação de responsabilidades
+- Organizar código usando classes
 - Praticar versionamento com Git e GitHub
-- Criar um projeto simples para portfólio
+- Criar um projeto simples e evolutivo para portfólio
 
 ---
 
@@ -30,17 +31,18 @@ Este projeto foi criado para fins educacionais, com os seguintes objetivos:
     - ✖️ Multiplicação
     - ➗ Divisão
 - Leitura de valores informados pelo usuário
-- Estrutura de classes separadas para cada operação
-- Validação de opção inválida no menu
-- Tratamento de divisão por zero
+- Validação de entrada do menu
+- Tratamento de erros para entradas inválidas
+- Estrutura de classes separadas por responsabilidade
 
 ---
 
 ## 🗂️ Estrutura do Projeto
+
 src/
 ├── application/
-│ ├── Main.java
-│ └── Menu.java
+│   ├── Main.java        # Classe principal que controla o fluxo da aplicação
+│   └── Menu.java        # Responsável por exibir o menu e validar a opção do usuário
 └── entities/
 ├── Somar.java
 ├── Subtrair.java
