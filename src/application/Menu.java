@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    public int menu(Scanner sc) {
+    public int exibirMenu(Scanner sc) {
 
         boolean inputValido = false;
 
@@ -21,12 +21,12 @@ public class Menu {
             System.out.println();
             System.out.println("Escolha uma opção: ");
 
-
             opcao = 0;
 
             try {
                 opcao = sc.nextInt();
-                //O menu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
+
+                //O exibirMenu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
                 if (opcao < 0 || opcao > 4) {
                     System.out.println("Opção inválida");
                     System.out.println("------------------------------");
@@ -37,8 +37,10 @@ public class Menu {
                 System.out.println("Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
                 sc.nextLine();
             }
-        } while (!inputValido);
+        }
+        while (!inputValido);
         return opcao;
+
 
     }
 }

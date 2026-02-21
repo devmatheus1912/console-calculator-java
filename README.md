@@ -1,97 +1,127 @@
-# 🧮 Console Calculator – Java
+# 🧮 Console Calculator - Java
 
-🇧🇷 **Português**
-
-Projeto de **calculadora em console**, desenvolvido em **Java 25 LTS**, com foco no aprendizado de **lógica de programação**, **organização de código com classes** e **boas práticas de versionamento com Git e GitHub**.
-
-Este projeto faz parte da minha evolução como iniciante em Java e será aprimorado gradualmente.
+Calculadora de console desenvolvida em Java com foco em aplicar conceitos de Programação Orientada a Objetos (POO) e boas práticas de arquitetura.
 
 ---
 
-## 🎯 Objetivo
+## 🚀 Objetivo do Projeto
 
-Este projeto foi criado para fins de estudo e evolução prática em Java.  
-O foco principal é:
+Este projeto começou como uma calculadora simples para praticar:
 
-- Aprender lógica de programação
-- Trabalhar com estruturas de repetição e decisão
-- Aplicar separação de responsabilidades
-- Organizar código usando classes
-- Praticar versionamento com Git e GitHub
-- Criar um projeto simples e evolutivo para portfólio
+- Estruturas condicionais (`switch`)
+- Estruturas de repetição (`do-while`)
+- Entrada de dados com `Scanner`
 
----
+Com a evolução do aprendizado, o projeto foi refatorado para aplicar:
 
-## ⚙️ Funcionalidades
-
-- Menu interativo no console
-- Operações matemáticas disponíveis:
-    - ➕ Adição
-    - ➖ Subtração
-    - ✖️ Multiplicação
-    - ➗ Divisão
-- Leitura de valores informados pelo usuário
-- Validação de entrada do menu
-- Tratamento de erros para entradas inválidas
-- Estrutura de classes separadas por responsabilidade
+- Interface
+- Polimorfismo
+- Delegação de responsabilidade
+- Separação de camadas
+- Baixo acoplamento
 
 ---
 
-## 🗂️ Estrutura do Projeto
-
-src/
-├── application/
-│   ├── Main.java        # Classe principal que controla o fluxo da aplicação
-│   └── Menu.java        # Responsável por exibir o menu e validar a opção do usuário
-└── entities/
+## 🏗 Estrutura do Projeto
+src
+├── application
+│ ├── Main.java
+│ └── Menu.java
+│
+└── entities
+├── Operacao.java
+├── Calculadora.java
 ├── Somar.java
 ├── Subtrair.java
 ├── Multiplicar.java
 └── Divisao.java
 
----
-
-## 🚀 Como Executar
-
-### Pré-requisitos
-- Java 25 LTS
-- IDE de sua preferência (IntelliJ IDEA, Eclipse ou VS Code)
-
-### Passos
-
-1. Clone o repositório:
-   git clone https://github.com/devmatheus1912/console-calculator-java.git
-2. Abra o projeto na IDE
-
-3. Execute a classe `Main`
-
-4. Utilize o menu no console
 
 ---
 
-## 📚 Aprendizados
+## 📦 Camadas
 
-- Estruturas condicionais (`if`, `switch`)
-- Estruturas de repetição (`do-while`)
-- Criação e uso de classes
-- Organização de pacotes
-- Entrada de dados com `Scanner`
-- Versionamento com Git e GitHub
+### 📌 application (Camada de Interface)
+Responsável pela interação com o usuário.
 
----
+- `Main` → Controla o fluxo do programa.
+- `Menu` → Exibe opções e valida entrada.
 
-## 🔧 Melhorias Futuras
+### 📌 entities (Camada de Regra de Negócio)
+Responsável pela lógica da aplicação.
 
-- Criar interface para operações matemáticas
-- Melhorar validações de entrada
-- Refatorar o menu
-- Adicionar testes unitários
-- Evoluir para uma versão mais orientada a objetos
+- `Operacao` → Interface que define o contrato das operações.
+- `Somar`, `Subtrair`, `Multiplicar`, `Divisao` → Implementações concretas.
+- `Calculadora` → Executa a operação recebida.
 
 ---
 
-## 👨‍💻 Autor
+## 🧠 Conceitos Aplicados
 
-Matheus Oliveira  
-Projeto desenvolvido para estudo e evolução em Java ☕
+### 🔹 Interface
 
+A interface `Operacao` define o contrato:
+
+```java
+double calcular(double a, double b);
+````
+Todas as operações implementam esse método.
+
+### 🔹 Polimorfismo
+
+A classe Calculadora recebe uma abstração (Operacao) e não depende de classes concretas.
+
+Isso permite adicionar novas operações sem modificar a estrutura principal.
+
+### 🔹 Separação de Responsabilidades
+
+Main → Controle do fluxo
+
+Menu → Interface com usuário
+
+Calculadora → Executa operação
+
+Classes concretas → Implementam regra matemática
+
+## 🔄 Fluxo da Aplicação
+
+Menu
+↓
+Usuário escolhe operação
+↓
+Main instancia a operação correspondente
+↓
+Calculadora executa
+↓
+Classe concreta calcula
+↓
+Resultado exibido
+
+
+## 🛠 Tecnologias Utilizadas
+
+Java 17+
+
+Programação Orientada a Objetos
+
+IntelliJ IDEA
+
+Git & GitHub
+
+## 🔮 Melhorias Futuras
+
+Implementar Factory de Operações
+
+Adicionar histórico de cálculos
+
+Criar testes unitários
+
+Transformar em API REST
+
+Criar interface gráfica
+
+##  👨‍💻 Autor
+
+Matheus Oliveira
+Estudante de Análise e Desenvolvimento de Sistemas
+Foco em desenvolvimento Back-end

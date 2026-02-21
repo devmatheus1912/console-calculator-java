@@ -1,74 +1,67 @@
 package application;
 
-import entities.Divisao;
-import entities.Multiplicar;
-import entities.Somar;
-import entities.Subtrair;
-
+import entities.*;
 import java.util.Locale;
 import java.util.Scanner;
 
-//Console Calc
-//Calculadora simples de console criada para praticar
-//estruturas de repetição, decisão e operações básicas em Java.
-
 public class Main {
+
     public static void main(String[] args) {
 
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        int opcao;
 
         Menu menu = new Menu();
-        Divisao divisao = new Divisao();
-        Multiplicar multiplicar = new Multiplicar();
-        Subtrair subtrair = new Subtrair();
-        Somar somar = new Somar();
+        Calculadora calculadora = new Calculadora();
 
-        //Loop principal do programa
+        int opcao;
+
         do {
-            opcao = menu.menu(sc);
+            opcao = menu.exibirMenu(sc);
+
             if (opcao != 0) {
-                System.out.println("Digite o primeiro número: ");
+
+                System.out.print("Digite o primeiro número: ");
                 double n1 = sc.nextDouble();
-                System.out.println("Digite o segundo número: ");
+
+                System.out.print("Digite o segundo número: ");
                 double n2 = sc.nextDouble();
 
-                //Executa a operação matemática conforme a opção escolhida no menu
+                Operacao operacaoEscolhida = null;
+
+                // Apenas decide qual operação criar
                 switch (opcao) {
                     case 1:
-                        double soma = somar.calcular(n1, n2);
-                        System.out.println("Soma: " + soma);
+                        operacaoEscolhida = new Somar();
                         break;
                     case 2:
-                        double subtracao = subtrair.calcular(n1, n2);
-                        System.out.println("Subtração: " + subtracao);
+                        operacaoEscolhida = new Subtrair();
                         break;
                     case 3:
-                        double multiplicacao = multiplicar.calcular(n1, n2);
-                        System.out.println("Multiplicação: " + multiplicacao);
+                        operacaoEscolhida = new Multiplicar();
                         break;
                     case 4:
-                        if (n2 == 0) {
-                            System.out.println("Divisão por zero impossível");
-                        } else {
-                            double dividir = divisao.calcular(n1, n2);
-                            System.out.println("Divisão: " + dividir);
-                        }
+                        operacaoEscolhida = new Divisao();
                         break;
                     default:
-                        System.out.println("Opção invalida");
-                        break;
+                        System.out.println("Opção inválida.");
+                        continue;
                 }
-                System.out.println();
+
+                try {
+                    double resultado = calculadora.executar(operacaoEscolhida, n1, n2);
+                    System.out.println("Resultado: " + resultado);
+                } catch (ArithmeticException e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
+
                 System.out.println("------------------------------");
-                System.out.println();
             } else {
                 System.out.println("Encerrando o programa...");
             }
+
         } while (opcao != 0);
 
-        //Finaliza o uso do Scanner e encerra o programa
         sc.close();
     }
 }
