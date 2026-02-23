@@ -1,6 +1,7 @@
 package application;
 
 import entities.*;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -18,16 +19,28 @@ public class Main {
 
         do {
             opcao = menu.exibirMenu(sc);
+            if (opcao == 5) {
+                calculadora.mostraRegistro();
+                IO.println();
+                continue;
+            } else if (opcao == 6) {
+                calculadora.limparRegistro();
+                IO.println("Historico limpo com sucesso");
+                continue;
+            }
+
 
             if (opcao != 0) {
 
-                System.out.print("Digite o primeiro número: ");
+                IO.print("Digite o primeiro número: ");
                 double n1 = sc.nextDouble();
 
-                System.out.print("Digite o segundo número: ");
+                IO.print("Digite o segundo número: ");
                 double n2 = sc.nextDouble();
 
+
                 Operacao operacaoEscolhida = null;
+
 
                 // Apenas decide qual operação criar
                 switch (opcao) {
@@ -44,20 +57,20 @@ public class Main {
                         operacaoEscolhida = new Divisao();
                         break;
                     default:
-                        System.out.println("Opção inválida.");
+                        IO.println("Opção inválida.");
                         continue;
                 }
 
                 try {
                     double resultado = calculadora.executar(operacaoEscolhida, n1, n2);
-                    System.out.println("Resultado: " + resultado);
+                    IO.println("Resultado: " + resultado);
                 } catch (ArithmeticException e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    IO.println("Erro: " + e.getMessage());
                 }
 
-                System.out.println("------------------------------");
+                IO.println("------------------------------");
             } else {
-                System.out.println("Encerrando o programa...");
+                IO.println("Encerrando o programa...");
             }
 
         } while (opcao != 0);

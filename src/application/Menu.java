@@ -10,16 +10,18 @@ public class Menu {
 
         int opcao;
         do {
-            System.out.println("================================");
-            System.out.println("        CONSOLE CALCULATOR       ");
-            System.out.println("================================");
-            System.out.println("1 - Somar");
-            System.out.println("2 - Subtrair");
-            System.out.println("3 - Multiplicar");
-            System.out.println("4 - Dividir");
-            System.out.println("0 - Sair");
-            System.out.println();
-            System.out.println("Escolha uma opção: ");
+            IO.println("================================");
+            IO.println("        CONSOLE CALCULATOR       ");
+            IO.println("================================");
+            IO.println("1 - Somar");
+            IO.println("2 - Subtrair");
+            IO.println("3 - Multiplicar");
+            IO.println("4 - Dividir");
+            IO.println("5 - Ver historico");
+            IO.println("6 - Limpar historico");
+            IO.println("0 - Sair");
+            IO.println();
+            IO.println("Escolha uma opção: ");
 
             opcao = 0;
 
@@ -27,14 +29,14 @@ public class Menu {
                 opcao = sc.nextInt();
 
                 //O exibirMenu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
-                if (opcao < 0 || opcao > 4) {
-                    System.out.println("Opção inválida");
-                    System.out.println("------------------------------");
+                if (opcao < 0 || opcao > 6) {
+                    IO.println("Opção inválida");
+                    IO.println("------------------------------");
                     continue;
                 }
                 inputValido = true; // Se chegou aqui, a entrada é válida
             } catch (InputMismatchException e) {
-                System.out.println("Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
+                IO.println("Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
                 sc.nextLine();
             }
         }

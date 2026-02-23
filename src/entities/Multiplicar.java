@@ -7,4 +7,9 @@ public class Multiplicar implements Operacao {
     public double calcular(double a, double b) {
         return a * b;
     }
+
+    @Override
+    public String getSimbolo() {
+        return "*";
+    }
 }
