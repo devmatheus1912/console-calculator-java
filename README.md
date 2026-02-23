@@ -143,9 +143,7 @@ Dependências
 
 Separação de responsabilidades
 
-Arquivo disponível em:
-
-docs/uml/Console_Calculator_UML_Completo.drawio
+![UML Diagram](docs/uml/Console_Calculator.drawio.png)
 
 ## 🔮 Melhorias Futuras
 
