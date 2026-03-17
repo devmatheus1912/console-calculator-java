@@ -4,45 +4,40 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+
     public int exibirMenu(Scanner sc) {
-
-        boolean inputValido = false;
-
-        int opcao;
-        do {
-            IO.println("================================");
-            IO.println("        CONSOLE CALCULATOR       ");
-            IO.println("================================");
-            IO.println("1 - Somar");
-            IO.println("2 - Subtrair");
-            IO.println("3 - Multiplicar");
-            IO.println("4 - Dividir");
-            IO.println("5 - Ver historico");
-            IO.println("6 - Limpar historico");
-            IO.println("0 - Sair");
-            IO.println();
-            IO.println("Escolha uma opção: ");
-
-            opcao = 0;
+        while (true) {
+            System.out.println("================================");
+            System.out.println("   CONSOLE CALCULATOR v2.0      ");
+            System.out.println("================================");
+            System.out.println("1 - Somar");
+            System.out.println("2 - Subtrair");
+            System.out.println("3 - Multiplicar");
+            System.out.println("4 - Dividir");
+            System.out.println("5 - Potência (a^b)");
+            System.out.println("6 - Raiz Quadrada");
+            System.out.println("7 - Logaritmo (log a na base b)");
+            System.out.println("8 - Seno (em radianos)");
+            System.out.println("9 - Ver histórico");
+            System.out.println("10 - Limpar histórico");
+            System.out.println("0 - Sair");
+            System.out.println();
+            System.out.println("Escolha uma opção: ");
 
             try {
-                opcao = sc.nextInt();
+                int opcao = sc.nextInt();
 
-                //O exibirMenu será exibido repetidamente até o usuário escolher a opção 0 (Sair)
-                if (opcao < 0 || opcao > 6) {
-                    IO.println("Opção inválida");
-                    IO.println("------------------------------");
-                    continue;
+                if (opcao >= 0 && opcao <= 10) {
+                    return opcao;
                 }
-                inputValido = true; // Se chegou aqui, a entrada é válida
+
+                System.out.println("Opção inválida");
+                System.out.println("------------------------------");
+
             } catch (InputMismatchException e) {
-                IO.println("Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
+                System.out.println("Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
                 sc.nextLine();
             }
         }
-        while (!inputValido);
-        return opcao;
-
-
     }
 }

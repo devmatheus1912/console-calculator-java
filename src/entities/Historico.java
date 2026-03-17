@@ -17,11 +17,21 @@ public class Historico {
 
     public void mostrarRegistros() {
         if (registros.isEmpty()) {
-            IO.println("Nenhum registro encontrado");
+            System.out.println("Nenhum registro encontrado");
         } else {
-            for (String registro : registros) {
-                IO.println(registro);
+            System.out.println("================================");
+            System.out.println("   HISTÓRICO DE OPERAÇÕES");
+            System.out.println("================================");
+
+            // NOVIDADE: Mostrar com numeração
+            for (int i = 0; i < registros.size(); i++) {
+                System.out.println("[" + (i + 1) + "] " + registros.get(i));
             }
+
+            // NOVIDADE: Mostrar quantidade
+            System.out.println("================================");
+            System.out.println("Total: " + registros.size() + " operações");
+            System.out.println("================================");
         }
     }
 
@@ -29,5 +39,8 @@ public class Historico {
         registros.clear();
     }
 
+    // Método para saber quantas operações tem.
+    public int getTotalOperacoes() {
+        return registros.size();
+    }
 }
-

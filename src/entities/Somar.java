@@ -12,4 +12,8 @@ public class Somar implements Operacao {
     public String getSimbolo() {
         return "+";
     }
+    @Override
+    public String formatar (double a, double b, double resultado) {
+        return a + " + " + b + " = " + resultado;
+    }
 }

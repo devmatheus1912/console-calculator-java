@@ -1,166 +1,170 @@
-# 🧮 Console Calculator - Java
+# 🧮 Console Calculator v3.0
 
-Calculadora de console desenvolvida em Java com foco em aplicar conceitos de Programação Orientada a Objetos (POO) e boas práticas de arquitetura.
-
----
-
-## 🚀 Objetivo do Projeto
-
-Este projeto começou como uma calculadora simples para praticar:
-
-- Estruturas condicionais (`switch`)
-- Estruturas de repetição (`do-while`)
-- Entrada de dados com `Scanner`
-
-Com a evolução do aprendizado, o projeto foi refatorado para aplicar:
-
-- Interface
-- Polimorfismo
-- Delegação de responsabilidade
-- Separação de camadas
-- Baixo acoplamento
+Calculadora de console desenvolvida em Java com foco em aprendizado de programação orientada a objetos (POO), boas práticas e organização de código.
 
 ---
 
-## 🏗 Estrutura do Projeto
-src
-├── application
-│ ├── Main.java
-│ └── Menu.java
-│
-└── entities
-├── Operacao.java
+## 🚀 Funcionalidades
+
+A calculadora permite realizar as seguintes operações:
+
+- ➕ Soma
+- ➖ Subtração
+- ✖️ Multiplicação
+- ➗ Divisão (com validação de divisão por zero)
+- 🔼 Potência (a^b)
+- √ Raiz Quadrada
+- 📊 Logaritmo (log de a na base b)
+- 🌊 Seno (em radianos)
+
+---
+
+## 🧠 Funcionalidades extras
+
+- 📜 Histórico de operações
+- 🧹 Limpeza do histórico
+- 🔢 Validação de entrada numérica
+- ⚠️ Tratamento de erros matemáticos
+
+---
+
+## 🏗️ Estrutura do projeto
+application/
+├── Main.java
+├── Menu.java
+├── ValidadorEntrada.java
+
+entities/
 ├── Calculadora.java
 ├── Historico.java
+├── Operacao.java
 ├── Somar.java
 ├── Subtrair.java
 ├── Multiplicar.java
-└── Divisao.java
-
-
----
-
-## 📦 Camadas
-
-### 📌 application (Camada de Interface)
-Responsável pela interação com o usuário.
-
-- `Main` → Controla o fluxo do programa.
-- `Menu` → Exibe opções e valida entrada.
-
-### 📌 entities (Camada de Regra de Negócio)
-Responsável pela lógica da aplicação.
-
-- `Operacao` → Interface que define o contrato das operações.
-- `Somar`, `Subtrair`, `Multiplicar`, `Divisao` → Implementações concretas.
-- `Calculadora` → Executa a operação recebida.
-- `Historico` → Armazena e gerencia o histórico das operações.
+├── Divisao.java
+├── Potencia.java
+├── RaizQuadrada.java
+├── Logaritmo.java
+├── Seno.java
 
 ---
 
-## 🧠 Conceitos Aplicados
+## ⚙️ Tecnologias utilizadas
 
-### 🔹 Interface
+- Java 17+
+- Programação Orientada a Objetos (POO)
+- Collections (Map, List)
+- Tratamento de exceções
 
-A interface `Operacao` define o contrato:
+---
+
+## 🧩 Conceitos aplicados
+
+### 🔹 Interface (Polimorfismo)
+
+Todas as operações implementam a interface:
 
 ```java
-double calcular(double a, double b);
-String getSimbolo();
+public interface Operacao {
+    double calcular(double a, double b);
+    String formatar(double a, double b, double resultado);
+}
 ````
-Todas as operações implementam esse método.
+👉 Permite tratar todas as operações de forma genérica.
 
 ### 🔹 Polimorfismo
 
-A classe Calculadora recebe uma abstração (Operacao) e não depende de classes concretas.
+A calculadora executa qualquer operação sem saber qual é:
+```
+double resultado = operacao.calcular(a, b);
+```
+### 🔹 Substituição do switch por Map
 
-Isso permite adicionar novas operações sem modificar a estrutura principal.
+Antes:
+```
+switch(opcao) { ... }
+```
+Agora:
+```
+Map<Integer, Operacao> operacoes = new HashMap<>();
+operacoes.put(1, new Somar());
+```
+👉 Código mais limpo e escalável.
+### 🔹 Princípio Open/Closed
 
-### 🔹 Encapsulamento
+Antes:
 
-O Historico é um atributo privado da Calculadora.
+A classe Calculadora usava instanceof
 
-O acesso ao histórico é feito por meio de métodos públicos controlados:
+Agora:
 
-mostrarHistorico()
+Cada operação sabe se formatar
+```
+operacao.formatar(a, b, resultado);
+````
+👉 A calculadora não precisa ser alterada para novas operações.
 
-limparHistorico()
+### 🔹 Tratamento de exceções
 
-### 🔹 Delegação
+Exemplo:
+```
+if (b == 0) {
+    throw new ArithmeticException("Não é possível dividir por zero");
+}
+````
 
-A Calculadora delega a responsabilidade de armazenar e listar registros para a classe Historico.
+## 📈 Evolução do projeto
+### 🔹 Versão 1.0
 
-## 🔄 Fluxo da Aplicação
-Menu
-↓
-Usuário escolhe operação
-↓
-Main instancia a operação correspondente
-↓
-Calculadora executa
-↓
-Classe concreta calcula
-↓
-Resultado exibido
-↓
-Registro salvo no histórico
+Operações básicas
 
-## 📜 Funcionalidades Atuais
+Menu simples
 
-✅ Soma
+### 🔹 Versão 2.0
 
-✅ Subtração
+Histórico de operações
 
-✅ Multiplicação
+Validação de entrada
 
-✅ Divisão (com tratamento de divisão por zero)
+Organização em pacotes
 
-✅ Histórico de operações
+### 🔹 Versão 3.0 (Atual)
 
-✅ Limpeza de histórico
+Remoção do switch → uso de Map
 
-✅ Validação de entrada de menu
+Remoção de instanceof
 
-## 🛠 Tecnologias Utilizadas
+Melhor arquitetura (mais orientada a objetos)
 
-Java 17+
+Novas operações:
 
-Programação Orientada a Objetos
+Logaritmo
 
-IntelliJ IDEA
+Seno
 
-Git & GitHub
+Potência
 
-## 📊 Diagrama UML
+Raiz Quadrada
 
-O projeto possui um diagrama UML completo com:
+Código mais limpo e escalável
 
-Interface e realizações
+## ▶️ Como executar
 
-Composição (Calculadora → Historico)
+Clone o repositório:
+````
+git clone https://github.com/seu-usuario/console-calculator-java.git
+````
+Abra no IntelliJ ou VS Code
 
-Dependências
-
-Separação de responsabilidades
-
-![UML Diagram](docs/uml/Console_Calculator.drawio.png)
-
-## 🔮 Melhorias Futuras
-
-Implementar Factory de Operações
-
-Substituir switch por Map<Integer, Operacao>
-
-Criar testes unitários (JUnit)
-
-Persistir histórico em arquivo
-
-Transformar em API REST (Spring Boot)
-
-Criar interface gráfica
-
-## 👨‍💻 Autor
+Execute a classe:
+````
+Main.java
+````
+## ‍💻 Autor
 
 Matheus Oliveira
-Estudante de Análise e Desenvolvimento de Sistemas
-Foco em desenvolvimento Back-end
+Projeto desenvolvido para aprendizado e evolução em Java e POO.
+
+## ⭐ Se gostou do projeto
+
+Deixe uma estrela ⭐ no repositório!

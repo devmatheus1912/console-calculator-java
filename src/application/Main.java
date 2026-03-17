@@ -2,7 +2,9 @@ package application;
 
 import entities.*;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -15,66 +17,88 @@ public class Main {
         Menu menu = new Menu();
         Calculadora calculadora = new Calculadora();
 
+        // Mapa de operações (substitui o switch)
+        Map<Integer, Operacao> operacoes = criarOperacoes();
+
         int opcao;
 
         do {
             opcao = menu.exibirMenu(sc);
-            if (opcao == 5) {
-                calculadora.mostraRegistro();
-                IO.println();
-                continue;
-            } else if (opcao == 6) {
-                calculadora.limparRegistro();
-                IO.println("Historico limpo com sucesso");
+
+            // Opção: Ver histórico
+            if (opcao == 9) {
+                calculadora.mostrarHistorico();
+                System.out.println();
                 continue;
             }
 
+            // Opção: Limpar histórico
+            if (opcao == 10) {
+                calculadora.limparHistorico();
+                System.out.println("Histórico limpo com sucesso");
+                System.out.println("------------------------------");
+                continue;
+            }
 
-            if (opcao != 0) {
+            // Busca a operação no Map
+            Operacao operacaoEscolhida = operacoes.get(opcao);
 
-                IO.print("Digite o primeiro número: ");
-                double n1 = sc.nextDouble();
+            // Se não existir operação
+            if (operacaoEscolhida == null && opcao != 0) {
+                System.out.println("Opção inválida.");
+                System.out.println("------------------------------");
+                continue;
+            }
 
-                IO.print("Digite o segundo número: ");
-                double n2 = sc.nextDouble();
+            // Executa operação
+            if (operacaoEscolhida != null) {
 
+                double n1 = ValidadorEntrada.pedirNumeroValido(sc, "Digite o primeiro número: ");
+                double n2 = 0;
 
-                Operacao operacaoEscolhida = null;
-
-
-                // Apenas decide qual operação criar
-                switch (opcao) {
-                    case 1:
-                        operacaoEscolhida = new Somar();
-                        break;
-                    case 2:
-                        operacaoEscolhida = new Subtrair();
-                        break;
-                    case 3:
-                        operacaoEscolhida = new Multiplicar();
-                        break;
-                    case 4:
-                        operacaoEscolhida = new Divisao();
-                        break;
-                    default:
-                        IO.println("Opção inválida.");
-                        continue;
+                // Algumas operações usam só 1 número
+                if (precisaSegundoNumero(opcao)) {
+                    n2 = ValidadorEntrada.pedirNumeroValido(sc, "Digite o segundo número: ");
                 }
 
                 try {
                     double resultado = calculadora.executar(operacaoEscolhida, n1, n2);
-                    IO.println("Resultado: " + resultado);
-                } catch (ArithmeticException e) {
-                    IO.println("Erro: " + e.getMessage());
-                }
 
-                IO.println("------------------------------");
-            } else {
-                IO.println("Encerrando o programa...");
+                    System.out.println("------------------------------");
+                    System.out.println("✓ Operação realizada com sucesso!");
+                    System.out.println("Resultado: " + resultado);
+                    System.out.println("Total de operações: " + calculadora.getTotalOperacoes());
+                    System.out.println("------------------------------");
+
+                } catch (ArithmeticException e) {
+                    System.out.println("❌ Erro: " + e.getMessage());
+                    System.out.println("------------------------------");
+                }
             }
 
         } while (opcao != 0);
 
         sc.close();
+    }
+
+    // Cria o mapa de operações
+    private static Map<Integer, Operacao> criarOperacoes() {
+        Map<Integer, Operacao> operacoes = new HashMap<>();
+
+        operacoes.put(1, new Somar());
+        operacoes.put(2, new Subtrair());
+        operacoes.put(3, new Multiplicar());
+        operacoes.put(4, new Divisao());
+        operacoes.put(5, new Potencia());
+        operacoes.put(6, new RaizQuadrada());
+        operacoes.put(7, new Logaritmo());
+        operacoes.put(8, new Seno());
+
+        return operacoes;
+    }
+
+    // Define se precisa de dois números
+    private static boolean precisaSegundoNumero(int opcao) {
+        return opcao != 6 && opcao != 8;
     }
 }

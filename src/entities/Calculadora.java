@@ -1,7 +1,6 @@
 package entities;
 
-
-public class Calculadora{
+public class Calculadora {
 
     private Historico historico;
 
@@ -9,20 +8,22 @@ public class Calculadora{
         this.historico = new Historico();
     }
 
-    public double executar (Operacao op, double a, double b){
-        double resultado = op.calcular(a,b);
-        String simbolo = op.getSimbolo();
-        String registro = a + " " + simbolo + " " + b + " = " + resultado;
-        historico.adicionarRegistro(registro);
+    public double executar(Operacao op, double a, double b) {
+        double resultado = op.calcular(a, b);
+        historico.adicionarRegistro(op.formatar(a, b, resultado));
         return resultado;
     }
-    public void mostraRegistro (){
+
+    public void mostrarHistorico() {
         historico.mostrarRegistros();
     }
-    public void limparRegistro(){
-       historico.limparRegistros();
+
+    public void limparHistorico() {
+        historico.limparRegistros();
+    }
+
+    // Método para saber total de operações
+    public int getTotalOperacoes() {
+        return historico.getTotalOperacoes();
     }
 }
-
-
-
