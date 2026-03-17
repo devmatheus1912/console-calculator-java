@@ -128,8 +128,6 @@ Validação de entrada
 
 Organização em pacotes
 
-### 🔹 Versão 3.0 (Atual)
-
 Remoção do switch → uso de Map
 
 Remoção de instanceof
