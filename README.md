@@ -154,7 +154,7 @@ Clone o repositório:
 ````
 git clone https://github.com/seu-usuario/console-calculator-java.git
 ````
-Abra no IntelliJ ou VS Code
+Abra no IntelliJ ou VS Code.
 
 Execute a classe:
 ````
