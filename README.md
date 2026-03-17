@@ -1,4 +1,4 @@
-# 🧮 Console Calculator v3.0
+# 🧮 Console Calculator v2.0
 
 Calculadora de console desenvolvida em Java com foco em aprendizado de programação orientada a objetos (POO), boas práticas e organização de código.
 
