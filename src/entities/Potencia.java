@@ -11,7 +11,7 @@ public class Potencia implements OperacaoBinaria {
     }
     @Override
     public String getNome() {
-        return "Potencia";
+        return "Potência";
     }
     @Override
     public String formatar (double a, double b, double resultado) {

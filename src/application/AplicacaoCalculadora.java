@@ -40,9 +40,7 @@ public class AplicacaoCalculadora {
             }
 
             if (opcao == OPCAO_LIMPAR_HISTORICO) {
-                calculadora.limparHistorico();
-                System.out.println("Histórico limpo com sucesso");
-                mostrarSeparador();
+                limparHistorico();
                 continue;
             }
 
@@ -73,7 +71,7 @@ public class AplicacaoCalculadora {
 
         try {
             double resultado = calculadora.executarOperacao(operacao, n1, n2);
-            mostrarSucesso(resultado);
+            mostrarSucesso(operacao.getNome(), resultado);
         } catch (ArithmeticException e) {
             mostrarErro(e.getMessage());
         }
@@ -84,15 +82,29 @@ public class AplicacaoCalculadora {
 
         try {
             double resultado = calculadora.executarOperacao(operacao, n1);
-            mostrarSucesso(resultado);
+            mostrarSucesso(operacao.getNome(), resultado);
         } catch (ArithmeticException e) {
             mostrarErro(e.getMessage());
         }
     }
 
-    private void mostrarSucesso(double resultado) {
+    private void limparHistorico() {
+        int totalAntes = calculadora.getTotalOperacoes();
+        calculadora.limparHistorico();
+
+        if (totalAntes == 0) {
+            System.out.println("O histórico já estava vazio.");
+        } else {
+            System.out.println("Histórico limpo com sucesso. " + totalAntes + " registro(s) removido(s).");
+        }
+
+        mostrarSeparador();
+    }
+
+    private void mostrarSucesso(String nomeOperacao, double resultado) {
         mostrarSeparador();
         System.out.println("✓ Operação realizada com sucesso!");
+        System.out.println("Operação: " + nomeOperacao);
         System.out.println("Resultado: " + resultado);
         System.out.println("Total de operações: " + calculadora.getTotalOperacoes());
         mostrarSeparador();

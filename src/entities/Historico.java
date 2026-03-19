@@ -17,7 +17,7 @@ public class Historico {
 
     public void mostrarRegistros() {
         if (registros.isEmpty()) {
-            System.out.println("Nenhum registro encontrado");
+            System.out.println("Nenhuma operação foi realizada ainda.");
         } else {
             System.out.println("================================");
             System.out.println("   HISTÓRICO DE OPERAÇÕES");

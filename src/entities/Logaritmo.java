@@ -14,7 +14,7 @@ public class Logaritmo implements OperacaoBinaria {
 
     @Override
     public String getNome() {
-        return "log";
+        return "logaritmo";
     }
 
     @Override
