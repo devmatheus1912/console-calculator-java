@@ -1,32 +1,37 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class ValidadorEntrada {
 
-    private static final double VALOR_MAXIMO = 1000000;
-    private static final double VALOR_MINIMO = -1000000;
+    private static final double VALOR_MINIMO_PADRAO = -1_000_000;
+    private static final double VALOR_MAXIMO_PADRAO = 1_000_000;
 
-    public static boolean validarIntervalo(double numero) {
-        if (numero > VALOR_MAXIMO || numero < VALOR_MINIMO) {
-            System.out.println("Erro: O número deve estar entre " + VALOR_MINIMO + " e " + VALOR_MAXIMO);
-            return false;
-        }
-        return true;
+    public static double pedirNumeroValido(Scanner sc, String mensagem) {
+        return pedirNumeroValido(sc, mensagem, VALOR_MINIMO_PADRAO, VALOR_MAXIMO_PADRAO);
     }
-    // Pede número ao usuário com validação completa
 
-    public static double pedirNumeroValido(java.util.Scanner sc, String mensagem) {
+    public static double pedirNumeroValido(Scanner sc, String mensagem, double minimo, double maximo) {
         while (true) {
             try {
-                System.out.println(mensagem);
+                System.out.print(mensagem);
                 double numero = sc.nextDouble();
-                if (validarIntervalo(numero)) {     // Se válido, retorna.
-                    return numero;
+
+                if (numero < minimo || numero > maximo) {
+                    System.out.println("Erro: o número deve estar entre " + minimo + " e " + maximo + ".");
+                    continue;
                 }
-                // Se inválido, continua o loop.
-            } catch (java.util.InputMismatchException e) {
-                System.out.println("Erro: Digite um número válido!");
-                sc.nextLine(); // Limpa o buffer
+
+                return numero;
+
+            } catch (InputMismatchException e) {
+                System.out.println("Erro: digite um número válido.");
+                sc.nextLine();
             }
         }
+    }
+
+    private ValidadorEntrada() {
     }
 }
