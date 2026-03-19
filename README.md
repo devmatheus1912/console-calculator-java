@@ -111,12 +111,16 @@ Criação da classe AplicacaoCalculadora
 
 Remoção de lógica condicional baseada no menu
 
+Criação da classe RegistroOperacao para estruturar o histórico
+
+Histórico mais rico com data, hora, expressão e resultado
+
 Código mais limpo, organizado e escalável
 
 ## 📝 Exemplo de uso
 ```
 ================================
-CONSOLE CALCULATOR v2.0
+CONSOLE CALCULATOR v3.0
 ================================
 1 - Somar
 2 - Subtrair
@@ -139,6 +143,8 @@ Total de operações: 1
 ✔️ Histórico de operações
 
 ✔️ Limpeza do histórico
+
+✔️ Registro detalhado com data e hora
 
 ✔️ Validação de entrada do usuário
 
@@ -167,6 +173,8 @@ Este projeto foi evoluído em etapas:
 ✔️ Separação em operações binárias/unárias
 
 ✔️ Criação de camada de aplicação (AplicacaoCalculadora)
+
+✔️ Implementação de histórico estruturado com RegistroOperacao
 
 ✔️ Melhoria de legibilidade e organização
 
