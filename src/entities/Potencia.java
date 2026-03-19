@@ -1,6 +1,6 @@
 package entities;
 
-public class Potencia implements Operacao {
+public class Potencia implements OperacaoBinaria {
 
     @Override
     public double calcular(double a, double b) {
@@ -10,8 +10,8 @@ public class Potencia implements Operacao {
         return Math.pow(a, b);
     }
     @Override
-    public String getSimbolo() {
-        return "^";
+    public String getNome() {
+        return "Potencia";
     }
     @Override
     public String formatar (double a, double b, double resultado) {

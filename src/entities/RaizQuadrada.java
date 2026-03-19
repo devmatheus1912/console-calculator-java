@@ -1,9 +1,9 @@
 package entities;
 
-public class RaizQuadrada implements Operacao {
+public class RaizQuadrada implements OperacaoUnaria{
 
     @Override
-    public double calcular(double a, double b) {
+    public double calcular(double a) {
         if (a < 0) {
             throw new ArithmeticException("Não é possível calcular raiz de número negativo");
         }
@@ -11,12 +11,12 @@ public class RaizQuadrada implements Operacao {
     }
 
     @Override
-    public String getSimbolo() {
-        return "√";
+    public String getNome() {
+        return "Raiz Quadrada";
     }
 
     @Override
-    public String formatar(double a, double b, double resultado) {
+    public String formatar(double a, double resultado) {
         return "√" + a + " = " + resultado;
     }
 }

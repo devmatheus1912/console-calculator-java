@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public class Historico {
-    private List<String> registros = new ArrayList<>();
+    private final List<String> registros = new ArrayList<>();
 
     public void adicionarRegistro(String registro) {
         registros.add(registro);

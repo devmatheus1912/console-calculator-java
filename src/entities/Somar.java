@@ -1,7 +1,7 @@
 package entities;
 
 //Classe responsável por realizar a operação de soma
-public class Somar implements Operacao {
+public class Somar implements OperacaoBinaria {
 
     @Override
     public double calcular(double a, double b) {
@@ -9,8 +9,8 @@ public class Somar implements Operacao {
     }
 
     @Override
-    public String getSimbolo() {
-        return "+";
+    public String getNome() {
+        return "Soma";
     }
     @Override
     public String formatar (double a, double b, double resultado) {

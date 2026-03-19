@@ -1,8 +1,8 @@
 package entities;
 
-public interface Operacao {
+public interface OperacaoBinaria {
      double calcular(double a, double b);
-     String getSimbolo();
+     String getNome();
      String formatar(double a, double b, double resultado);
 
 }
