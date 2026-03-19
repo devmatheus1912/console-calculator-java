@@ -10,12 +10,27 @@ public class Calculadora {
 
     public double executarOperacao (OperacaoBinaria op, double a, double b) {
         double resultado = op.calcular(a, b);
-        historico.adicionarRegistro(op.formatar(a, b, resultado));
+        String expressao = op.formatar(a, b, resultado);
+
+        RegistroOperacao registro = new RegistroOperacao(
+                op.getNome(),
+                expressao,
+                resultado
+        );
+        historico.adicionarRegistro(registro);
         return resultado;
     }
+
     public double executarOperacao (OperacaoUnaria op, double a) {
         double resultado = op.calcular(a);
-        historico.adicionarRegistro(op.formatar(a, resultado));
+        String expressao = op.formatar(a, resultado);
+
+        RegistroOperacao registro = new RegistroOperacao(
+                op.getNome(),
+                expressao,
+                resultado
+        );
+        historico.adicionarRegistro(registro);
         return resultado;
     }
 
