@@ -1,168 +1,187 @@
-# 🧮 Console Calculator v2.0
+# 🚀 Console Calculator (Java)
 
-Calculadora de console desenvolvida em Java com foco em aprendizado de programação orientada a objetos (POO), boas práticas e organização de código.
+Uma calculadora de console desenvolvida em Java com foco em boas práticas de programação orientada a objetos (POO), organização de código e evolução incremental do projeto.
 
----
+## 📌 Sobre o projeto
 
-## 🚀 Funcionalidades
+Este projeto simula uma calculadora interativa no terminal, permitindo ao usuário realizar operações matemáticas, visualizar histórico e limpar registros.
 
-A calculadora permite realizar as seguintes operações:
+O principal objetivo foi evoluir de uma implementação simples para uma arquitetura mais organizada e escalável.
 
-- ➕ Soma
-- ➖ Subtração
-- ✖️ Multiplicação
-- ➗ Divisão (com validação de divisão por zero)
-- 🔼 Potência (a^b)
-- √ Raiz Quadrada
-- 📊 Logaritmo (log de a na base b)
-- 🌊 Seno (em radianos)
+## 🧠 Principais conceitos aplicados
 
----
+Programação Orientada a Objetos (POO)
 
-## 🧠 Funcionalidades extras
+Separação de responsabilidades
 
-- 📜 Histórico de operações
-- 🧹 Limpeza do histórico
-- 🔢 Validação de entrada numérica
-- ⚠️ Tratamento de erros matemáticos
+Interfaces e polimorfismo
 
----
+Sobrecarga de métodos
+
+Tratamento de exceções
+
+Estrutura modular (camadas)
+
+Refatoração de código
+
+Boas práticas de legibilidade
 
 ## 🏗️ Estrutura do projeto
-application/
-├── Main.java
-├── Menu.java
-├── ValidadorEntrada.java
 
-entities/
-├── Calculadora.java
-├── Historico.java
-├── Operacao.java
-├── Somar.java
-├── Subtrair.java
-├── Multiplicar.java
-├── Divisao.java
-├── Potencia.java
-├── RaizQuadrada.java
-├── Logaritmo.java
-├── Seno.java
+O projeto foi organizado em duas camadas principais:
 
----
+### 📂 application
 
-## ⚙️ Tecnologias utilizadas
+Responsável pelo controle da aplicação (interface com o usuário)
 
-- Java 17+
-- Programação Orientada a Objetos (POO)
-- Collections (Map, List)
-- Tratamento de exceções
+Main → ponto de entrada
 
----
+AplicacaoCalculadora → controla o fluxo do sistema
 
-## 🧩 Conceitos aplicados
+Menu → exibe e valida opções
 
-### 🔹 Interface (Polimorfismo)
+ValidadorEntrada → valida dados digitados pelo usuário
 
-Todas as operações implementam a interface:
+### 📂 entities
 
-```java
-public interface Operacao {
-    double calcular(double a, double b);
-    String formatar(double a, double b, double resultado);
-}
-````
-👉 Permite tratar todas as operações de forma genérica.
+Responsável pela lógica de negócio
 
-### 🔹 Polimorfismo
+Calculadora → executa operações
 
-A calculadora executa qualquer operação sem saber qual é:
-```
-double resultado = operacao.calcular(a, b);
-```
-### 🔹 Substituição do switch por Map
+Historico → armazena operações realizadas
 
-Antes:
-```
-switch(opcao) { ... }
-```
-Agora:
-```
-Map<Integer, Operacao> operacoes = new HashMap<>();
-operacoes.put(1, new Somar());
-```
-👉 Código mais limpo e escalável.
-### 🔹 Princípio Open/Closed
+Interfaces:
 
-Antes:
+OperacaoBinaria
 
-A classe Calculadora usava instanceof
+OperacaoUnaria
 
-Agora:
+Operações implementadas:
 
-Cada operação sabe se formatar
-```
-operacao.formatar(a, b, resultado);
-````
-👉 A calculadora não precisa ser alterada para novas operações.
+Soma
 
-### 🔹 Tratamento de exceções
+Subtração
 
-Exemplo:
-```
-if (b == 0) {
-    throw new ArithmeticException("Não é possível dividir por zero");
-}
-````
+Multiplicação
 
-## 📈 Evolução do projeto
-### 🔹 Versão 1.0
-
-Operações básicas
-
-Menu simples
-
-### 🔹 Versão 2.0
-
-Histórico de operações
-
-Validação de entrada
-
-Organização em pacotes
-
-Remoção do switch → uso de Map
-
-Remoção de instanceof
-
-Melhor arquitetura (mais orientada a objetos)
-
-Novas operações:
-
-Logaritmo
-
-Seno
+Divisão
 
 Potência
 
+Logaritmo
+
 Raiz Quadrada
 
-Código mais limpo e escalável
+Seno
 
-## ▶️ Como executar
+## ⚙️ Como funciona
 
-Clone o repositório:
-````
-git clone https://github.com/seu-usuario/console-calculator-java.git
-````
-Abra no IntelliJ ou VS Code.
+O usuário escolhe uma operação no menu
 
-Execute a classe:
-````
-Main.java
-````
-## ‍💻 Autor
+O sistema identifica se é:
 
-Matheus Oliveira
-Projeto desenvolvido para aprendizado e evolução em Java e POO.
+operação binária (2 números)
 
-## ⭐ Se gostou do projeto
+operação unária (1 número)
 
-Deixe uma estrela ⭐ no repositório!
+Os valores são validados
+
+A operação é executada
+
+O resultado é exibido
+
+A operação é registrada no histórico
+
+## 🧩 Arquitetura (evolução do projeto)
+Antes
+
+Main centralizava toda a lógica
+
+Uso de switch
+
+Todas operações com mesma assinatura
+
+Depois (versão atual)
+
+Separação em OperacaoBinaria e OperacaoUnaria
+
+Uso de Map para mapear operações
+
+Criação da classe AplicacaoCalculadora
+
+Remoção de lógica condicional baseada no menu
+
+Código mais limpo, organizado e escalável
+
+## 📝 Exemplo de uso
+```
+================================
+CONSOLE CALCULATOR v2.0
+================================
+1 - Somar
+2 - Subtrair
+3 - Multiplicar
+...
+Escolha uma opção: 1
+
+Digite o primeiro número: 10
+Digite o segundo número: 5
+
+✓ Operação realizada com sucesso!
+Operação: Soma
+Resultado: 15.0
+Total de operações: 1
+```
+## 📊 Funcionalidades
+
+✔️ Operações matemáticas básicas e avançadas
+
+✔️ Histórico de operações
+
+✔️ Limpeza do histórico
+
+✔️ Validação de entrada do usuário
+
+✔️ Tratamento de erros (ex: divisão por zero)
+
+✔️ Estrutura preparada para expansão
+
+## 🔧 Tecnologias utilizadas
+
+Java 17+
+
+IntelliJ IDEA
+
+Git & GitHub
+
+## 📈 Evolução do projeto
+
+Este projeto foi evoluído em etapas:
+
+✔️ Versão inicial com switch
+
+✔️ Refatoração para uso de interfaces
+
+✔️ Implementação de histórico
+
+✔️ Separação em operações binárias/unárias
+
+✔️ Criação de camada de aplicação (AplicacaoCalculadora)
+
+✔️ Melhoria de legibilidade e organização
+
+## 💡 Melhorias futuras
+
+Criar classe RegistroOperacao (histórico estruturado)
+
+Adicionar testes unitários
+
+Persistir histórico em arquivo
+
+Interface gráfica (GUI)
+
+Suporte a mais funções matemáticas
+
+## 🧑‍💻 Autor
+
+Desenvolvido por Matheus Oliveira
