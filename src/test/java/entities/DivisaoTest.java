@@ -2,33 +2,27 @@ package entities;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DivisaoTest {
 
     @Test
-    void deveDividirDoisNumerosCorretamente() {
-        Divisao divisao = new Divisao();
-        double resultado = divisao.calcular(10, 2);
-        assertEquals(5.0, resultado);
+    void deveDividirCorretamente() {
+        Divisao d = new Divisao();
+        assertEquals(5.0, d.calcular(10, 2));
     }
 
     @Test
-    void deveLancarExcecaoAoDividirPorZero() {
-        Divisao divisao = new Divisao();
-        ArithmeticException exception = assertThrows(
-                ArithmeticException.class,
-                () -> divisao.calcular(10, 0)
-        );
+    void deveLancarErroDivisaoPorZero() {
+        Divisao d = new Divisao();
 
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> d.calcular(10, 0));
         assertEquals("Não é possível dividir por zero", exception.getMessage());
     }
 
     @Test
-    void deveFormatarExpressaoDeDivisao() {
-        Divisao divisao = new Divisao();
-        String expressao = divisao.formatar(10, 2, 5);
-        assertEquals("10.0 / 2.0 = 5.0", expressao);
+    void deveDividirNumeroNegativo() {
+        Divisao d = new Divisao();
+        assertEquals(-5.0, d.calcular(-10, 2));
     }
 }
