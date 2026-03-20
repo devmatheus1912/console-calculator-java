@@ -2,194 +2,178 @@
 
 Uma calculadora de console desenvolvida em Java com foco em boas práticas de programação orientada a objetos (POO), organização de código e evolução incremental do projeto.
 
+---
+
 ## 📌 Sobre o projeto
 
-Este projeto simula uma calculadora interativa no terminal, permitindo ao usuário realizar operações matemáticas, visualizar histórico e limpar registros.
+Este projeto simula uma calculadora interativa no terminal, permitindo ao usuário realizar operações matemáticas básicas e avançadas, além de visualizar e gerenciar o histórico das operações realizadas.
 
-O principal objetivo foi evoluir de uma implementação simples para uma arquitetura mais organizada e escalável.
+O projeto foi evoluído em versões para aplicar conceitos reais de desenvolvimento backend.
 
-## 🧠 Principais conceitos aplicados
+---
 
-Programação Orientada a Objetos (POO)
+## 🧠 Conceitos aplicados
 
-Separação de responsabilidades
+* Programação Orientada a Objetos (POO)
+* Encapsulamento
+* Polimorfismo
+* Interfaces
+* Separação de responsabilidades
+* Tratamento de exceções
+* Testes automatizados com JUnit
+* Gerenciamento de dependências com Maven
 
-Interfaces e polimorfismo
+---
 
-Sobrecarga de métodos
+## ⚙️ Funcionalidades
 
-Tratamento de exceções
+### ➕ Operações básicas
 
-Estrutura modular (camadas)
+* Soma
+* Subtração
+* Multiplicação
+* Divisão
 
-Refatoração de código
+### 📐 Operações avançadas
 
-Boas práticas de legibilidade
+* Potência
+* Raiz quadrada
+* Logaritmo
+* Seno
 
-## 🏗️ Estrutura do projeto
+### 📜 Histórico
 
-O projeto foi organizado em duas camadas principais:
+* Registro de todas as operações
+* Exibição do histórico
+* Limpeza do histórico
 
-### 📂 main.application
+---
 
-Responsável pelo controle da aplicação (interface com o usuário)
+## 🛡️ Validações implementadas
 
-Main → ponto de entrada
+* Divisão por zero
+* Raiz quadrada de número negativo
+* Logaritmo com valores inválidos
+* Base de logaritmo inválida
+* Ângulos muito grandes no seno
 
-AplicacaoCalculadora → controla o fluxo do sistema
+---
 
-Menu → exibe e valida opções
+## 🧪 Testes automatizados
 
-ValidadorEntrada → valida dados digitados pelo usuário
+A versão 3.0 introduz testes unitários utilizando **JUnit 5**, garantindo maior confiabilidade do sistema.
 
-### 📂 main.test.entities
+### 📊 Cobertura de testes
 
-Responsável pela lógica de negócio
+* ✔️ Operações matemáticas
+* ✔️ Tratamento de exceções
+* ✔️ Classe Calculadora
+* ✔️ Classe Historico
 
-Calculadora → executa operações
+### 📈 Resultado
 
-Historico → armazena operações realizadas
+* **28 testes executados**
+* **28 testes aprovados**
 
-Interfaces:
+---
 
-OperacaoBinaria
+## 📁 Estrutura do projeto
 
-OperacaoUnaria
-
-Operações implementadas:
-
-Soma
-
-Subtração
-
-Multiplicação
-
-Divisão
-
-Potência
-
-Logaritmo
-
-Raiz Quadrada
-
-Seno
-
-## ⚙️ Como funciona
-
-O usuário escolhe uma operação no menu
-
-O sistema identifica se é:
-
-operação binária (2 números)
-
-operação unária (1 número)
-
-Os valores são validados
-
-A operação é executada
-
-O resultado é exibido
-
-A operação é registrada no histórico
-
-## 🧩 Arquitetura (evolução do projeto)
-Antes
-
-Main centralizava toda a lógica
-
-Uso de switch
-
-Todas operações com mesma assinatura
-
-Depois (versão atual)
-
-Separação em OperacaoBinaria e OperacaoUnaria
-
-Uso de Map para mapear operações
-
-Criação da classe AplicacaoCalculadora
-
-Remoção de lógica condicional baseada no menu
-
-Criação da classe RegistroOperacao para estruturar o histórico
-
-Histórico mais rico com data, hora, expressão e resultado
-
-Código mais limpo, organizado e escalável
-
-## 📝 Exemplo de uso
 ```
-================================
-CONSOLE CALCULATOR v3.0
-================================
-1 - Somar
-2 - Subtrair
-3 - Multiplicar
-...
-Escolha uma opção: 1
+## 📁 Estrutura do projeto
 
-Digite o primeiro número: 10
-Digite o segundo número: 5
-
-✓ Operação realizada com sucesso!
-Operação: Soma
-Resultado: 15.0
-Total de operações: 1
+```text
+src
+├── main
+│   └── java
+│       ├── application
+│       │   ├── AplicacaoCalculadora.java
+│       │   ├── Main.java
+│       │   ├── Menu.java
+│       │   └── ValidadorEntrada.java
+│       └── entities
+│           ├── Calculadora.java
+│           ├── Historico.java
+│           ├── RegistroOperacao.java
+│           ├── OperacaoBinaria.java
+│           ├── OperacaoUnaria.java
+│           ├── Somar.java
+│           ├── Subtrair.java
+│           ├── Multiplicar.java
+│           ├── Divisao.java
+│           ├── Potencia.java
+│           ├── RaizQuadrada.java
+│           ├── Logaritmo.java
+│           └── Seno.java
+└── test
+    └── java
+        └── entities
+            ├── CalculadoraTest.java
+            ├── HistoricoTest.java
+            ├── SomarTest.java
+            ├── SubtrairTest.java
+            ├── MultiplicarTest.java
+            ├── DivisaoTest.java
+            ├── PotenciaTest.java
+            ├── RaizQuadradaTest.java
+            ├── LogaritmoTest.java
+            └── SenoTest.java
 ```
-## 📊 Funcionalidades
 
-✔️ Operações matemáticas básicas e avançadas
+---
 
-✔️ Histórico de operações
+## ▶️ Como executar
 
-✔️ Limpeza do histórico
+### 🔧 Pré-requisitos
 
-✔️ Registro detalhado com data e hora
+* Java 17+ (ou Java 25)
+* Maven
 
-✔️ Validação de entrada do usuário
+### ▶️ Rodar aplicação
 
-✔️ Tratamento de erros (ex: divisão por zero)
+```
+mvn compile
+mvn exec:java
+```
 
-✔️ Estrutura preparada para expansão
+---
 
-## 🔧 Tecnologias utilizadas
+### 🧪 Rodar testes
 
-Java 17+
+```
+mvn test
+```
 
-IntelliJ IDEA
+---
 
-Git & GitHub
+## 🔖 Versionamento
 
-## 📈 Evolução do projeto
+### 🚀 v3.0
 
-Este projeto foi evoluído em etapas:
+* Testes automatizados com JUnit
+* Validação de operações
+* Testes do histórico
+* Melhor organização do código
 
-✔️ Versão inicial com switch
+### 🔄 v2.0
 
-✔️ Refatoração para uso de interfaces
+* Histórico de operações
+* Novas operações matemáticas
+* Melhor separação de classes
 
-✔️ Implementação de histórico
+---
 
-✔️ Separação em operações binárias/unárias
+## 📌 Próximos passos
 
-✔️ Criação de camada de aplicação (AplicacaoCalculadora)
+* Transformar o projeto em API REST (Spring Boot)
+* Criar interface gráfica (GUI)
+* Persistência de dados (banco)
+* Melhorar cobertura de testes
 
-✔️ Implementação de histórico estruturado com RegistroOperacao
+---
 
-✔️ Melhoria de legibilidade e organização
+## 👨‍💻 Autor
 
-## 💡 Melhorias futuras
+Desenvolvido por **Matheus Oliveira** 🚀
 
-Criar classe RegistroOperacao (histórico estruturado)
-
-Adicionar testes unitários
-
-Persistir histórico em arquivo
-
-Interface gráfica (GUI)
-
-Suporte a mais funções matemáticas
-
-## 🧑‍💻 Autor
-
-Desenvolvido por Matheus Oliveira
+---
