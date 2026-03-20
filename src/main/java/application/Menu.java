@@ -32,7 +32,7 @@ public class Menu {
 
     private void imprimirMenu() {
         System.out.println(SEPARADOR);
-        System.out.println("   CONSOLE CALCULATOR v2.0");
+        System.out.println("   CONSOLE CALCULATOR v3.0");
         System.out.println(SEPARADOR);
         System.out.println("1 - Somar");
         System.out.println("2 - Subtrair");

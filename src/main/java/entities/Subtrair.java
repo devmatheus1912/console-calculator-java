@@ -1,6 +1,5 @@
 package entities;
 
-//Classe responsável por realizar a operação de subtração
 public class Subtrair implements OperacaoBinaria {
 
     @Override

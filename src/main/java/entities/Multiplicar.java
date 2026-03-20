@@ -1,6 +1,5 @@
 package entities;
 
-//Classe responsável por realizar a operação de multiplicação
 public class Multiplicar implements OperacaoBinaria {
 
     @Override

@@ -1,6 +1,5 @@
 package entities;
 
-//Classe responsável por realizar a operação de soma
 public class Somar implements OperacaoBinaria {
 
     @Override
