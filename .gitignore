@@ -30,3 +30,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+target/
+*.class
+*.log
+.idea/
+*.iml
