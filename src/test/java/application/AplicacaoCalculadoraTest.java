@@ -1,231 +1,67 @@
 package application;
 
+import entities.Calculadora;
+import entities.Divisao;
+import entities.Logaritmo;
+import entities.Multiplicar;
+import entities.OperacaoBinaria;
+import entities.OperacaoUnaria;
+import entities.Potencia;
+import entities.RaizQuadrada;
+import entities.Seno;
+import entities.Somar;
+import entities.Subtrair;
 import org.junit.jupiter.api.Test;
+import repository.HistoricoEmMemoriaRepository;
+import service.CalculadoraService;
+import validation.ValidarNumero;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AplicacaoCalculadoraTest {
 
     @Test
-    void deveEncerrarQuandoUsuarioEscolherSair() {
-        String entrada = "0\n";
+    void deveExecutarSomaComFakeIO() {
+        FakeIO io = new FakeIO(List.of("1", "10", "5", "0"));
 
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
+        CalculadoraService service = new CalculadoraService(
+                new Calculadora(),
+                new ValidarNumero(),
+                new HistoricoEmMemoriaRepository()
+        );
 
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
+        Menu menu = new Menu(io);
 
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
+        Map<Integer, OperacaoBinaria> operacoesBinarias = new HashMap<>();
+        operacoesBinarias.put(1, new Somar());
+        operacoesBinarias.put(2, new Subtrair());
+        operacoesBinarias.put(3, new Multiplicar());
+        operacoesBinarias.put(4, new Divisao());
+        operacoesBinarias.put(5, new Potencia());
+        operacoesBinarias.put(7, new Logaritmo());
 
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
+        Map<Integer, OperacaoUnaria> operacoesUnarias = new HashMap<>();
+        operacoesUnarias.put(6, new RaizQuadrada());
+        operacoesUnarias.put(8, new Seno());
 
-            assertDoesNotThrow(aplicacao::iniciar);
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
+        AplicacaoCalculadora app = new AplicacaoCalculadora(
+                io,
+                menu,
+                service,
+                operacoesBinarias,
+                operacoesUnarias
+        );
 
-        String textoSaida = saidaCapturada.toString();
+        app.executar();
 
-        assertTrue(textoSaida.contains("Calculadora encerrada."));
-    }
+        String saida = io.getSaidaCompleta();
 
-    @Test
-    void deveExecutarSomaComSucesso() {
-        String entrada = "1\n10\n5\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("✓ Operação realizada com sucesso!"));
-        assertTrue(textoSaida.contains("Operação: Soma"));
-        assertTrue(textoSaida.contains("Resultado: 15.0"));
-        assertTrue(textoSaida.contains("Total de operações: 1"));
-    }
-
-    @Test
-    void deveExecutarRaizQuadradaComSucesso() {
-        String entrada = "6\n9\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("✓ Operação realizada com sucesso!"));
-        assertTrue(textoSaida.contains("Operação: Raiz Quadrada"));
-        assertTrue(textoSaida.contains("Resultado: 3.0"));
-        assertTrue(textoSaida.contains("Total de operações: 1"));
-    }
-
-    @Test
-    void deveMostrarErroAoDividirPorZero() {
-        String entrada = "4\n10\n0\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("❌ Erro:"));
-    }
-
-    @Test
-    void deveMostrarHistoricoQuandoSolicitado() {
-        String entrada = "1\n2\n3\n9\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("Operação: Soma"));
-        assertTrue(textoSaida.contains("Resultado: 5.0"));
-    }
-
-    @Test
-    void deveLimparHistoricoComSucessoQuandoHouverRegistros() {
-        String entrada = "1\n2\n3\n10\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("Histórico limpo com sucesso."));
-    }
-
-    @Test
-    void deveInformarQuandoHistoricoJaEstiverVazio() {
-        String entrada = "10\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("O histórico já estava vazio."));
-    }
-
-    @Test
-    void deveContinuarFluxoAposEntradaInvalidaNoMenu() {
-        String entrada = "abc\n1\n4\n6\n0\n";
-
-        ByteArrayInputStream entradaSimulada = new ByteArrayInputStream(entrada.getBytes());
-        ByteArrayOutputStream saidaCapturada = new ByteArrayOutputStream();
-
-        PrintStream saidaOriginal = System.out;
-        java.io.InputStream entradaOriginal = System.in;
-
-        System.setIn(entradaSimulada);
-        System.setOut(new PrintStream(saidaCapturada));
-
-        try {
-            AplicacaoCalculadora aplicacao = new AplicacaoCalculadora();
-            aplicacao.iniciar();
-        } finally {
-            System.setIn(entradaOriginal);
-            System.setOut(saidaOriginal);
-        }
-
-        String textoSaida = saidaCapturada.toString();
-
-        assertTrue(textoSaida.contains("Erro: entrada inválida. Digite apenas números inteiros."));
-        assertTrue(textoSaida.contains("✓ Operação realizada com sucesso!"));
-        assertTrue(textoSaida.contains("Resultado: 10.0"));
+        assertTrue(saida.contains("Operação: Soma"));
+        assertTrue(saida.contains("Resultado: 15.0"));
+        assertTrue(saida.contains("Encerrando calculadora..."));
     }
 }

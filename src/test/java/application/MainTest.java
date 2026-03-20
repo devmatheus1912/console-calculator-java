@@ -13,7 +13,7 @@ class MainTest {
 
     @Test
     void deveExecutarMainSemErro() {
-        String entrada = "0\n"; // sair imediatamente
+        String entrada = "0\n0\n";
 
         ByteArrayInputStream input = new ByteArrayInputStream(entrada.getBytes());
         ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -33,6 +33,6 @@ class MainTest {
 
         String textoSaida = output.toString();
 
-        assertTrue(textoSaida.contains("Calculadora encerrada."));
+        assertTrue(textoSaida.contains("Encerrando calculadora."));
     }
 }

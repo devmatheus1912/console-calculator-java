@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Historico {
-
     private static final String CABECALHO = "================================";
     private final List<RegistroOperacao> registros = new ArrayList<>();
 
     public void adicionarRegistro(RegistroOperacao registro) {
         registros.add(registro);
+    }
+
+    public List<RegistroOperacao> listar() {
+        return List.copyOf(registros);
     }
 
     public void mostrarRegistros() {
@@ -19,7 +22,7 @@ public class Historico {
         }
 
         System.out.println(CABECALHO);
-        System.out.println("   HISTÓRICO DE OPERAÇÕES");
+        System.out.println(" HISTÓRICO DE OPERAÇÕES");
         System.out.println(CABECALHO);
 
         for (int i = 0; i < registros.size(); i++) {

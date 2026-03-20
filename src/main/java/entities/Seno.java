@@ -1,15 +1,17 @@
 package entities;
 
+import exceptions.RegraDeNegocioException;
+
 public class Seno implements OperacaoUnaria {
+
     @Override
     public double calcular(double a) {
-        // Mantemos um limite prático para evitar entradas extremamente grandes,
-        // que podem confundir o usuário quanto à precisão do resultado.
         if (Math.abs(a) > 10000) {
-            throw new ArithmeticException("Ângulo muito grande; use valores menores para precisão");
+            throw new RegraDeNegocioException("Ângulo muito grande; use valores menores para melhor precisão.");
         }
         return Math.sin(a);
     }
+
     @Override
     public String getNome() {
         return "Seno";
@@ -20,5 +22,3 @@ public class Seno implements OperacaoUnaria {
         return "sen(" + a + ") = " + resultado;
     }
 }
-
-

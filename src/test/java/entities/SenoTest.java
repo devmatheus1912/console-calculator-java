@@ -1,5 +1,6 @@
 package entities;
 
+import exceptions.RegraDeNegocioException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,11 +18,13 @@ class SenoTest {
     @Test
     void deveLancarExcecaoParaAnguloMuitoGrande() {
         Seno seno = new Seno();
-        ArithmeticException exception = assertThrows(
-                ArithmeticException.class,
+
+        RegraDeNegocioException exception = assertThrows(
+                RegraDeNegocioException.class,
                 () -> seno.calcular(10001)
         );
-        assertEquals("Ângulo muito grande; use valores menores para precisão", exception.getMessage());
+
+        assertEquals("Ângulo muito grande; use valores menores para melhor precisão.", exception.getMessage());
     }
 
     @Test

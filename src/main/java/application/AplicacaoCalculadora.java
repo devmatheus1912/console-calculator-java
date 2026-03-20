@@ -1,10 +1,14 @@
 package application;
 
-import entities.*;
+import entities.OperacaoBinaria;
+import entities.OperacaoUnaria;
+import entities.ResultadoOperacao;
+import exceptions.RegraDeNegocioException;
+import service.CalculadoraService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class AplicacaoCalculadora {
 
@@ -13,132 +17,154 @@ public class AplicacaoCalculadora {
     private static final int OPCAO_LIMPAR_HISTORICO = 10;
     private static final String SEPARADOR = "------------------------------";
 
-    private final Scanner sc;
+    private final IO io;
     private final Menu menu;
-    private final Calculadora calculadora;
+    private final CalculadoraService service;
     private final Map<Integer, OperacaoBinaria> operacoesBinarias;
     private final Map<Integer, OperacaoUnaria> operacoesUnarias;
 
-    public AplicacaoCalculadora() {
-        this.sc = new Scanner(System.in);
-        this.menu = new Menu();
-        this.calculadora = new Calculadora();
-        this.operacoesBinarias = criarOperacoesBinarias();
-        this.operacoesUnarias = criarOperacoesUnarias();
+    public AplicacaoCalculadora(
+            IO io,
+            Menu menu,
+            CalculadoraService service,
+            Map<Integer, OperacaoBinaria> operacoesBinarias,
+            Map<Integer, OperacaoUnaria> operacoesUnarias
+    ) {
+        this.io = io;
+        this.menu = menu;
+        this.service = service;
+        this.operacoesBinarias = operacoesBinarias;
+        this.operacoesUnarias = operacoesUnarias;
     }
 
-    public void iniciar() {
+    public void executar() {
         int opcao;
 
         do {
-            opcao = menu.exibirMenu(sc);
+            opcao = menu.exibirMenu();
 
-            if (opcao == OPCAO_HISTORICO) {
-                calculadora.mostrarHistorico();
-                System.out.println();
-                continue;
+            try {
+                processarOpcao(opcao);
+            } catch (RegraDeNegocioException e) {
+                io.println("Erro: " + e.getMessage());
+            } catch (Exception e) {
+                io.println("Erro inesperado: " + e.getMessage());
             }
 
-            if (opcao == OPCAO_LIMPAR_HISTORICO) {
-                limparHistorico();
-                continue;
-            }
-
-            processarOpcao(opcao);
+            io.println(SEPARADOR);
 
         } while (opcao != OPCAO_SAIR);
-
-        encerrar();
     }
 
     private void processarOpcao(int opcao) {
-        OperacaoBinaria operacaoBinaria = operacoesBinarias.get(opcao);
-        OperacaoUnaria operacaoUnaria = operacoesUnarias.get(opcao);
-
-        if (operacaoBinaria != null) {
-            executarOperacaoBinaria(operacaoBinaria);
-        } else if (operacaoUnaria != null) {
-            executarOperacaoUnaria(operacaoUnaria);
-        } else if (opcao != OPCAO_SAIR) {
-            System.out.println("Opção inválida.");
-            mostrarSeparador();
+        if (opcao == OPCAO_SAIR) {
+            io.println("Encerrando calculadora...");
+            return;
         }
+
+        if (opcao == OPCAO_HISTORICO) {
+            exibirHistorico();
+            return;
+        }
+
+        if (opcao == OPCAO_LIMPAR_HISTORICO) {
+            limparHistorico();
+            return;
+        }
+
+        if (operacoesBinarias.containsKey(opcao)) {
+            executarOperacaoBinaria(operacoesBinarias.get(opcao));
+            return;
+        }
+
+        if (operacoesUnarias.containsKey(opcao)) {
+            executarOperacaoUnaria(operacoesUnarias.get(opcao));
+            return;
+        }
+
+        io.println("Opção inválida.");
     }
 
     private void executarOperacaoBinaria(OperacaoBinaria operacao) {
-        double n1 = ValidadorEntrada.pedirNumeroValido(sc, "Digite o primeiro número: ");
-        double n2 = ValidadorEntrada.pedirNumeroValido(sc, "Digite o segundo número: ");
+        double a = lerDouble("Digite o primeiro número: ");
+        double b = lerDouble("Digite o segundo número: ");
 
-        try {
-            double resultado = calculadora.executarOperacao(operacao, n1, n2);
-            mostrarSucesso(operacao.getNome(), resultado);
-        } catch (ArithmeticException e) {
-            mostrarErro(e.getMessage());
-        }
+        ResultadoOperacao resultado = service.executarBinaria(operacao, a, b);
+        io.println("Operação: " + resultado.nomeOperacao());
+        io.println("Expressão: " + resultado.expressao());
+        io.println("Resultado: " + resultado.resultado());
     }
 
     private void executarOperacaoUnaria(OperacaoUnaria operacao) {
-        double n1 = ValidadorEntrada.pedirNumeroValido(sc, "Digite o número: ");
+        double a = lerDouble("Digite o número: ");
 
-        try {
-            double resultado = calculadora.executarOperacao(operacao, n1);
-            mostrarSucesso(operacao.getNome(), resultado);
-        } catch (ArithmeticException e) {
-            mostrarErro(e.getMessage());
+        ResultadoOperacao resultado = service.executarUnaria(operacao, a);
+        io.println("Operação: " + resultado.nomeOperacao());
+        io.println("Expressão: " + resultado.expressao());
+        io.println("Resultado: " + resultado.resultado());
+    }
+
+    private void exibirHistorico() {
+        var historico = service.listarHistorico();
+
+        if (historico.isEmpty()) {
+            io.println("Nenhuma operação foi realizada ainda.");
+            return;
         }
+
+        io.println("================================");
+        io.println(" HISTÓRICO DE OPERAÇÕES");
+        io.println("================================");
+
+        for (int i = 0; i < historico.size(); i++) {
+            var registro = historico.get(i);
+            io.println("[" + (i + 1) + "] " + registro.expressao());
+        }
+
+        io.println("================================");
+        io.println("Total: " + historico.size() + " operação(ões)");
+        io.println("================================");
     }
 
     private void limparHistorico() {
-        int totalAntes = calculadora.getTotalOperacoes();
-        calculadora.limparHistorico();
+        List<?> historico = service.listarHistorico();
 
-        if (totalAntes == 0) {
-            System.out.println("O histórico já estava vazio.");
-        } else {
-            System.out.println("Histórico limpo com sucesso. " + totalAntes + " registro(s) removido(s).");
+        if (historico.isEmpty()) {
+            io.println("O histórico já estava vazio.");
+            return;
         }
 
-        mostrarSeparador();
+        service.limparHistorico();
+        io.println("Histórico limpo com sucesso.");
     }
 
-    private void mostrarSucesso(String nomeOperacao, double resultado) {
-        mostrarSeparador();
-        System.out.println("✓ Operação realizada com sucesso!");
-        System.out.println("Operação: " + nomeOperacao);
-        System.out.println("Resultado: " + resultado);
-        System.out.println("Total de operações: " + calculadora.getTotalOperacoes());
-        mostrarSeparador();
+    private int lerInteiro(String mensagem) {
+        while (true) {
+            try {
+                io.print(mensagem);
+                return Integer.parseInt(io.readLine());
+            } catch (NumberFormatException e) {
+                io.println("Digite um número inteiro válido.");
+            }
+        }
     }
 
-    private void mostrarErro(String mensagem) {
-        System.out.println("❌ Erro: " + mensagem);
-        mostrarSeparador();
+    private double lerDouble(String mensagem) {
+        while (true) {
+            try {
+                io.print(mensagem);
+                return Double.parseDouble(io.readLine().replace(",", "."));
+            } catch (NumberFormatException e) {
+                io.println("Digite um número válido.");
+            }
+        }
     }
 
-    private void mostrarSeparador() {
-        System.out.println(SEPARADOR);
+    public static Map<Integer, OperacaoBinaria> criarOperacoesBinarias(Map<Integer, OperacaoBinaria> operacoes) {
+        return new HashMap<>(operacoes);
     }
 
-    private void encerrar() {
-        sc.close();
-        System.out.println("Calculadora encerrada.");
-    }
-
-    private Map<Integer, OperacaoBinaria> criarOperacoesBinarias() {
-        Map<Integer, OperacaoBinaria> operacoes = new HashMap<>();
-        operacoes.put(1, new Somar());
-        operacoes.put(2, new Subtrair());
-        operacoes.put(3, new Multiplicar());
-        operacoes.put(4, new Divisao());
-        operacoes.put(5, new Potencia());
-        operacoes.put(7, new Logaritmo());
-        return operacoes;
-    }
-
-    private Map<Integer, OperacaoUnaria> criarOperacoesUnarias() {
-        Map<Integer, OperacaoUnaria> operacoes = new HashMap<>();
-        operacoes.put(6, new RaizQuadrada());
-        operacoes.put(8, new Seno());
-        return operacoes;
+    public static Map<Integer, OperacaoUnaria> criarOperacoesUnarias(Map<Integer, OperacaoUnaria> operacoes) {
+        return new HashMap<>(operacoes);
     }
 }

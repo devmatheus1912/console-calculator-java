@@ -1,5 +1,6 @@
 package entities;
 
+import exceptions.RegraDeNegocioException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,11 +18,13 @@ class RaizQuadradaTest {
     @Test
     void deveLancarExcecaoParaNumeroNegativo() {
         RaizQuadrada raizQuadrada = new RaizQuadrada();
-        ArithmeticException exception = assertThrows(
-                ArithmeticException.class,
+
+        RegraDeNegocioException exception = assertThrows(
+                RegraDeNegocioException.class,
                 () -> raizQuadrada.calcular(-9)
         );
-        assertEquals("Não é possível calcular raiz de número negativo", exception.getMessage());
+
+        assertEquals("Não é possível calcular raiz de número negativo.", exception.getMessage());
     }
 
     @Test

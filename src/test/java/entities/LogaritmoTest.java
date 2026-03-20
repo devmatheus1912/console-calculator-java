@@ -1,5 +1,6 @@
 package entities;
 
+import exceptions.RegraDeNegocioException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,21 +18,25 @@ class LogaritmoTest {
     @Test
     void deveLancarExcecaoQuandoNumeroForMenorOuIgualAZero() {
         Logaritmo logaritmo = new Logaritmo();
-        ArithmeticException exception = assertThrows(
-                ArithmeticException.class,
+
+        RegraDeNegocioException exception = assertThrows(
+                RegraDeNegocioException.class,
                 () -> logaritmo.calcular(0, 2)
         );
-        assertEquals("Logaritmos só existem para números positivos", exception.getMessage());
+
+        assertEquals("Logaritmo só existe para números positivos.", exception.getMessage());
     }
 
     @Test
     void deveLancarExcecaoQuandoBaseForInvalida() {
         Logaritmo logaritmo = new Logaritmo();
-        ArithmeticException exception = assertThrows(
-                ArithmeticException.class,
+
+        RegraDeNegocioException exception = assertThrows(
+                RegraDeNegocioException.class,
                 () -> logaritmo.calcular(8, 1)
         );
-        assertEquals("A base do logaritmo deve ser positiva e diferente de 1", exception.getMessage());
+
+        assertEquals("A base do logaritmo deve ser positiva e diferente de 1.", exception.getMessage());
     }
 
     @Test

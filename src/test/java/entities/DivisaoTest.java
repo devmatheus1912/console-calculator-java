@@ -1,8 +1,10 @@
 package entities;
 
+import exceptions.RegraDeNegocioException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DivisaoTest {
 
@@ -16,8 +18,12 @@ class DivisaoTest {
     void deveLancarErroDivisaoPorZero() {
         Divisao d = new Divisao();
 
-        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> d.calcular(10, 0));
-        assertEquals("Não é possível dividir por zero", exception.getMessage());
+        RegraDeNegocioException exception = assertThrows(
+                RegraDeNegocioException.class,
+                () -> d.calcular(10, 0)
+        );
+
+        assertEquals("Não é possível dividir por zero.", exception.getMessage());
     }
 
     @Test
