@@ -30,7 +30,7 @@ Boas práticas de legibilidade
 
 O projeto foi organizado em duas camadas principais:
 
-### 📂 application
+### 📂 main.application
 
 Responsável pelo controle da aplicação (interface com o usuário)
 
@@ -42,7 +42,7 @@ Menu → exibe e valida opções
 
 ValidadorEntrada → valida dados digitados pelo usuário
 
-### 📂 entities
+### 📂 main.test.entities
 
 Responsável pela lógica de negócio
 
